@@ -1,0 +1,27 @@
+managed implementation in class zbp_i_dpl_header unique;
+strict ( 2 );
+
+define behavior for ZI_DPL_Header alias Header
+persistent table ztb_dpl_hd
+lock master
+authorization master ( global ) // Change from ( instance ) to ( global )
+{
+  create;
+  update;
+  delete;
+  association _Items { create; }
+
+  field ( numbering : managed, readonly ) dpl_uuid;
+}
+
+define behavior for ZI_DPL_Item alias Item
+persistent table ztb_dpl_itm
+lock dependent by _Header
+authorization dependent by _Header
+{
+  update;
+  delete;
+  field ( numbering : managed, readonly ) item_uuid;
+  field ( readonly ) dpl_uuid;
+  association _Header;
+}

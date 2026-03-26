@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for DPL Uploader'
+define service ZUI_DPL_UPLOADER {
+  expose ZI_DPL_Header as Header;
+  expose ZI_DPL_Item   as Items;
+}

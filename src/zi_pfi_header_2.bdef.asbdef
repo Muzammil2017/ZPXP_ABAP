@@ -1,0 +1,79 @@
+managed implementation in class zbp_i_pfi_header_2 unique;
+strict ( 2 );
+
+define behavior for ZI_PFI_HEADER_2 alias PfiHeader
+persistent table zmm_pfi_header
+lock master
+authorization master ( global )
+etag master ChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly : update ) CreatedBy, CreatedAt, ChangedBy, ChangedAt, LocalLastChangedAt;
+
+  association _Item { create; }
+
+  mapping for zmm_pfi_header
+  {
+    PfiNumber          = pfi_number;
+    Supplier           = supplier;
+    Currency           = currency;
+    Status             = status;
+    QuotationNo        = quotation_no;
+    PfiDate            = pfi_date;
+    PfiOfferValidity   = pfi_offer_validity;
+    RateType           = rate_type;
+    ForexRate          = forex_rate;
+    RateDate           = rate_date;
+    PaymentTerm        = payment_term;
+    ModeOfShipment     = mode_of_shipment;
+    IncoTerm           = inco_term;
+    DepartureDate      = departure_date;
+    ArrivalDate        = arrival_date;
+    PortOfLoading      = port_of_loading;
+    PortOfDischarge    = port_of_discharge;
+    NatureOfShipment   = nature_of_shipment;
+    CreatedBy          = created_by;
+    CreatedAt          = created_at;
+    ChangedBy          = changed_by;
+    ChangedAt          = changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for ZI_PFI_ITEM_2 alias PfiItem
+persistent table zmm_pfi_item
+lock dependent by _Header
+authorization dependent by _Header
+etag master ChangedAt
+{
+  update;
+  delete;
+
+  field ( readonly : update ) CreatedBy, CreatedAt, ChangedBy, ChangedAt, LocalLastChangedAt;
+  field ( readonly ) PfiNumber;
+
+  association _Header;
+
+  mapping for zmm_pfi_item
+  {
+    PfiNumber          = pfi_number;
+    ItemNo             = item_no;
+    MaterialCode       = material_code;
+    ItemDescription    = item_description;
+    HsCode             = hs_code;
+    ModelName          = model_name;
+    LotSize            = lot_size;
+    PricePerUnit       = price_per_unit;
+    LineQty            = line_qty;
+    NoOfPo             = no_of_po;
+    TotalAmount        = total_amount;
+    CreatedBy          = created_by;
+    CreatedAt          = created_at;
+    ChangedBy          = changed_by;
+    ChangedAt          = changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

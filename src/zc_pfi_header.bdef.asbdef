@@ -1,0 +1,19 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_PFI_HEADER alias PfiHeader
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Items { create; }
+}
+
+define behavior for ZC_PFI_ITEM alias PfiItem
+{
+  use update;
+  use delete;
+
+  use association _Header;
+}

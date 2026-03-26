@@ -1,0 +1,6 @@
+@EndUserText.label: 'PFI Service Definition'
+define service ZMM_PFI {
+  expose ZC_PFI_HEADER_2 as PfiHeader;
+  expose ZC_PFI_ITEM_2   as PfiItem;
+  expose ZSUPPLIER_CDS   as SupplierVH;
+}

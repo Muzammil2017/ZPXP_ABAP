@@ -1,0 +1,29 @@
+@AccessControl.authorizationCheck: #MANDATORY
+@Metadata.allowExtensions: true
+@ObjectModel.sapObjectNodeType.name: 'ZRAP_TRAVEL_NEW'
+@EndUserText.label: '###GENERATED Core Data Service Entity'
+define root view entity ZR_RAP_TRAVEL_NEW
+  as select from ZRAP_TRAVEL_NEW as ZI_TRAVEL_TEST
+{
+  key travel_uuid as TravelUUID,
+  travel_id as TravelID,
+  agency_id as AgencyID,
+  customer_id as CustomerID,
+  begin_date as BeginDate,
+  end_date as EndDate,
+  booking_fee as BookingFee,
+  total_price as TotalPrice,
+  currency_code as CurrencyCode,
+  description as Description,
+  overall_status as OverallStatus,
+  @Semantics.user.createdBy: true
+  local_created_by as LocalCreatedBy,
+  @Semantics.systemDateTime.createdAt: true
+  local_created_at as LocalCreatedAt,
+  @Semantics.user.localInstanceLastChangedBy: true
+  local_last_changed_by as LocalLastChangedBy,
+  @Semantics.systemDateTime.localInstanceLastChangedAt: true
+  local_last_changed_at as LocalLastChangedAt,
+  @Semantics.systemDateTime.lastChangedAt: true
+  last_changed_at as LastChangedAt
+}

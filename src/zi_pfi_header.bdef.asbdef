@@ -1,0 +1,72 @@
+managed implementation in class zbp_i_pfi_header unique;
+strict ( 2 );
+
+define behavior for ZI_PFI_HEADER alias PfiHeader
+persistent table ztb_pfi_header
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly ) PfiId;
+  field ( readonly ) CreatedBy, CreatedAt, LastChangedAt;
+
+  association _Items { create; }
+
+  mapping for ztb_pfi_header corresponding
+  {
+    PfiId              = pfi_id;
+    SupplierCode       = supplier_code;
+    PfiNumber          = pfi_number;
+    PfiDate            = pfi_date;
+    PfiValidityDate    = pfi_validity_date;
+    Currency           = currency;
+    ExchangeRate       = exchange_rate;
+    ModeOfShipment     = mode_of_shipment;
+    IncoTerm           = inco_term;
+    PaymentTerm        = payment_term;
+    DepartureDate      = departure_date;
+    ArrivalDate        = arrival_date;
+    Status             = status;
+    CreatedBy          = created_by;
+    CreatedAt          = created_at;
+    LastChangedAt      = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for ZI_PFI_ITEM alias PfiItem
+persistent table ztb_pfi_item
+lock dependent by _Header
+authorization dependent by _Header
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  field ( readonly ) PfiId, ItemNo;
+  field ( readonly ) CreatedBy, CreatedAt, LastChangedAt;
+
+  association _Header;
+
+  mapping for ztb_pfi_item corresponding
+  {
+    PfiId               = pfi_id;
+    ItemNo              = item_no;
+    MaterialCode        = material_code;
+    MaterialDescription = material_description;
+    HsCode              = hs_code;
+    LotSize             = lot_size;
+    LineQty             = line_qty;
+    FobUnitPrice        = fob_unit_price;
+    Currency            = currency;
+    TotalAmount         = total_amount;
+    CreatedBy           = created_by;
+    CreatedAt           = created_at;
+    LastChangedAt       = last_changed_at;
+    LocalLastChangedAt  = local_last_changed_at;
+  }
+}

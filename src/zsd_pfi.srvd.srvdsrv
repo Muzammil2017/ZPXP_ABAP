@@ -1,0 +1,5 @@
+@EndUserText.label: 'Proforma Invoice Service Definition'
+define service ZSD_PFI {
+  expose ZC_PFI_HEADER as PfiHeader;
+  expose ZC_PFI_ITEM   as PfiItem;
+}
